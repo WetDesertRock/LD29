@@ -69,7 +69,7 @@ local third = {
     maxedges = 20,
     maxedgelen = 110,
     dimrate = 1.7,
-    textbox = {311,161,471,421},
+    textbox = {18,270,766,317},
     goalnode = {250,201},
     rednodes = {
         {442,39},
@@ -101,8 +101,8 @@ local fourth = {
     maxedges = 50,
     maxedgelen = 110,
     dimrate = 1.5,
-    textbox = {410,354,372,230},
-    goalnode = {273,429},
+    textbox = {106,362,528,223},
+    goalnode = {339,196},
     rednodes = {
         {245,31},
         {632,39},
@@ -122,7 +122,7 @@ local fourth = {
         {215,252,2},
         {419,290},
         {280,299},
-        {353,366},
+        {346,267},
     }
 }
 
@@ -141,11 +141,11 @@ local fifth = {
     maxedges = 50,
     maxedgelen = 110,
     dimrate = 1.5,
-    textbox = {13,265,542,313},
+    textbox = {118,237,551,334},
     goalnode = {369,31},
     rednodes = {
-        {20,17},
         {548,121},
+        {49,146},
     },
     bluenodes = {
         {713,14},
