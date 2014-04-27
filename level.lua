@@ -120,7 +120,7 @@ end
 
 function Level:toggleEdge(na,nb)
     local retval = nil
-    local e,i = self:findEdge(na,nb,25)
+    local e,i = self:findEdge(na,nb,50)
     if na == nb or na == nil or nb == nil then
         return nil
     end
@@ -173,7 +173,7 @@ function Level:makeFriend(n,c)
 end
 
 function Level:findNode(x,y,maxdist)
-    maxdist = maxdist or 50/2
+    maxdist = maxdist or 50
     local closest = nil
     local closestdist = 0
     for _,n in ipairs(self.nodes) do

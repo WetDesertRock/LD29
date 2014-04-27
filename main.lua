@@ -38,7 +38,7 @@ function love.load()
     music = Media:getSound("music.ogg")
     music:setLooping(true)
     music:setVolume(0.7)
-    -- music:play()
+    music:play()
 end
 
 State_GameOver = {}
@@ -97,9 +97,14 @@ function State_Game.update(dt)
 end
 
 function State_Game.keypressed(key,isrepeat)
-    -- if key == " " then
-    --     game:flash()
-    -- end
+    if key == "m" then
+        local v = music:getVolume()
+        if v == 0 then
+            music:setVolume(0.7)
+        else
+            music:setVolume(0)
+        end
+    end
 end
 
 function State_Game.mousepressed(x,y,button)
@@ -111,7 +116,7 @@ function State_Game.mousereleased(x,y,button)
     if button == "l" then
         if game.currentlevel.dragsnode then
             local act = nil
-            local onode = game.currentlevel:findNode(x,y)
+            local onode = game.currentlevel:findNode(x,y,35)
             if onode then
                 act = game.currentlevel:toggleEdge(game.currentlevel.dragsnode,onode)
             end
