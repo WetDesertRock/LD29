@@ -69,15 +69,15 @@ function State_GameOver.draw()
     local w = love.graphics.getWidth()/4
     local off = (love.graphics.getWidth()-w)/2
     local self = State_GameOver
-    love.graphics.setColor(unpack(BLUECOLOR),200)
+    love.graphics.setColor(BLUECOLOR[1],BLUECOLOR[2],BLUECOLOR[3],200)
     love.graphics.printf(tostring(math.floor(self.tb)),off,200,w,"right")
-    love.graphics.setColor(unpack(REDCOLOR),200)
+    love.graphics.setColor(REDCOLOR[1],REDCOLOR[2],REDCOLOR[3],200)
     love.graphics.printf(tostring(math.floor(self.tr)),off,240,w,"right")
     love.graphics.setColor(60,60,60,200)
     love.graphics.printf(tostring(math.floor(self.bonus)),off,280,w,"right")
     love.graphics.printf("+",off,280,w,"left")
     love.graphics.printf("------------",off,300,w,"right")
-    love.graphics.printf(tostring(math.floor(self.bonus,self.tr+self.tb+self.bonus)),off,320,w,"right")
+    love.graphics.printf(tostring(math.floor(self.bonus,self.tr+self.tb+self.bonus)),off,325,w,"right")
 end
 
 State_Game = {}
