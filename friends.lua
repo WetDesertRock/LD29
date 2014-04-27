@@ -29,7 +29,7 @@ function Friend:gotoNextNode()
             else
                 snd = Media:getSound("hitnoder.ogg")
             end
-            snd:play():setVolume(0.6)
+            snd:play():setVolume(0.3)
         else
             flux.to(self.curnode,0.25,{scalemod=0.08}):after(self.curnode, 0.3, {scalemod=0})
             game.currentlevel:killFriend(self,self.k)

@@ -25,6 +25,7 @@ function Game:draw(levelset)
 end
 
 function Game:winLevel()
+    self.friendflux = flux.group()
     self.leveli = self.leveli +1
     if self.levels[self.leveli] == nil then
         local finalscores = self.scores:getFinal()
@@ -42,6 +43,7 @@ function Game:flash()
 end
 
 function Game:resetLevel()
+    self.friendflux = flux.group()
     self.currentlevel = Level(self.levels[self.leveli],self.scores:getPrevalence(),self.levels.text[self.leveli])
     self.scores:startNewLevel(self.currentlevel.maxscore,true)
 end

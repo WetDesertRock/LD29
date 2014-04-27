@@ -4,10 +4,12 @@ function Level:new(lt,prev,text)
     self.name = lt.name
 
     self.goaln = GoalNode(lt.goalnode[1],lt.goalnode[2],70)
-    self.redn = StartNode(lt.rednode[1],lt.rednode[2],50,REDCOLOR,2)
-    self.bluen = StartNode(lt.bluenode[1],lt.bluenode[2],50,BLUECOLOR,1)
+    self.rednodes = {}
+    -- self.redn = StartNode(lt.rednode[1],lt.rednode[2],50,REDCOLOR,2)
+    self.bluenodes = {}
+    -- self.bluen = StartNode(lt.bluenode[1],lt.bluenode[2],50,BLUECOLOR,1)
 
-    self.nodes = {self.goaln,self.redn,self.bluen}
+    self.nodes = {self.goaln}
     self.edges = {}
     self.friends = {}
 
@@ -18,6 +20,19 @@ function Level:new(lt,prev,text)
         else
             n = Node(p[1],p[2],50)
         end
+        table.insert(self.nodes,n)
+    end
+
+    for _,p in ipairs(lt.bluenodes) do
+        local n
+        n = StartNode(p[1],p[2],50,BLUECOLOR,1)
+        table.insert(self.bluenodes,n)
+        table.insert(self.nodes,n)
+    end
+    for _,p in ipairs(lt.rednodes) do
+        local n
+        n = StartNode(p[1],p[2],50,REDCOLOR,2)
+        table.insert(self.rednodes,n)
         table.insert(self.nodes,n)
     end
 
@@ -37,7 +52,11 @@ function Level:new(lt,prev,text)
     local _,lines = font:getWrap(self.text, lt.textbox[3])
     lt.textbox[4] = lines*font:getHeight()
 
-    self.helptext = "("..lt.helptext..")"
+    if lt.helptext then
+        self.helptext = "("..lt.helptext..")"
+    else
+        self.helptext = ""
+    end
 
     if lt.background ~= nil then
         local fluxmods = {}
@@ -156,8 +175,12 @@ function Level:checkPaths()
         if self:findEdge(node,neighbor) then return true end
         return false
     end
-    self.redn.path = astar.path(self.redn, self.goaln, self.nodes, true, valid_edge)
-    self.bluen.path = astar.path(self.bluen, self.goaln, self.nodes, true, valid_edge)
+    for _,bluen in ipairs(self.bluenodes) do
+        bluen.path = astar.path(bluen, self.goaln, self.nodes, true, valid_edge)
+    end
+    for _,redn in ipairs(self.rednodes) do
+        redn.path = astar.path(redn, self.goaln, self.nodes, true, valid_edge)
+    end
 end
 
 function Level:killFriend(f,k)

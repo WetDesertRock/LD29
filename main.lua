@@ -50,11 +50,10 @@ State_Global = {}
 
 function State_Global.keypressed(key,isrepeat)
     if key == "m" then
-        local v = music:getVolume()
-        if v == 0 then
-            music:setVolume(0.7)
+        if music._paused then
+            music:resume()
         else
-            music:setVolume(0)
+            music:pause()
         end
     end
 end
