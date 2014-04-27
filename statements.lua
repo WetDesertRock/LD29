@@ -1,22 +1,34 @@
-local currentstate = nil
+local states = {}
+
+states.currentstate = nil
+states.globalstate = nil
 
 local function callMethod(m,...)
-    if currentstate == nil then return end
-    if currentstate[m] then
-        return currentstate[m](...)
+    if states.globalstate and states.globalstate[m] then
+        states.globalstate[m](...)
+    end
+    if states.currentstate == nil then return end
+    if states.currentstate[m] then
+        states.currentstate[m](...)
     end
 end
 
-function switchState(s,...)
+local function switchState(s,...)
     callMethod("leave",s,...)
-    currentstate = s
+    states.currentstate = s
     callMethod("enter",s,...)
 end
+
+local function setGlobalState(s)
+    states.globalstate = s
+end
+
+states.setGlobalState = setGlobalState
+states.switchState = switchState
 
 function love.update(...)
     callMethod("update",...)
 end
-
 
 function love.mousepressed(...)
     callMethod("mousepressed",...)
@@ -31,3 +43,5 @@ end
 function love.draw(...)
     callMethod("draw",...)
 end
+
+return states

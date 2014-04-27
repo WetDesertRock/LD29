@@ -1,6 +1,6 @@
 Level = Object:extend()
 
-function Level:new(lt,prev)
+function Level:new(lt,prev,text)
     self.name = lt.name
 
     self.goaln = GoalNode(lt.goalnode[1],lt.goalnode[2],70)
@@ -27,13 +27,17 @@ function Level:new(lt,prev)
     game.scores.maxscore = lt.maxscore
     game.scores.dimrate = lt.dimrate
 
-    self.text = lt.text[prev]
+    if text[2] then
+        self.text = text[prev]
+    else
+        self.text = text[1]
+    end
     self.textbox = lt.textbox
     local font = Media:getFont("SegoeWP/SegoeWP.ttf",20)
     local _,lines = font:getWrap(self.text, lt.textbox[3])
     lt.textbox[4] = lines*font:getHeight()
 
-    self.helptext = lt.helptext
+    self.helptext = "("..lt.helptext..")"
 
     if lt.background ~= nil then
         local fluxmods = {}

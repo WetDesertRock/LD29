@@ -28,11 +28,11 @@ function Game:winLevel()
     self.leveli = self.leveli +1
     if self.levels[self.leveli] == nil then
         local finalscores = self.scores:getFinal()
-        switchState(State_GameOver,finalscores)
+        states.switchState(State_GameOver,finalscores)
         return
     end
     self.scores:startNewLevel(self.levels[self.leveli].maxscore)
-    self.currentlevel = Level(self.levels[self.leveli],self.scores:getPrevalence())
+    self.currentlevel = Level(self.levels[self.leveli],self.scores:getPrevalence(),self.levels.text[self.leveli])
     Media:getSound("win.ogg"):play()
     self:flash()
 end
@@ -42,7 +42,7 @@ function Game:flash()
 end
 
 function Game:resetLevel()
-    self.currentlevel = Level(self.levels[self.leveli],self.scores:getPrevalence())
+    self.currentlevel = Level(self.levels[self.leveli],self.scores:getPrevalence(),self.levels.text[self.leveli])
     self.scores:startNewLevel(self.currentlevel.maxscore,true)
 end
 
